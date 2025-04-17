@@ -1,0 +1,132 @@
+CadicalExhaustPath: "/mnt/h/Data/cadical-exhaustive-master/build/cadical"
+
+081:
+{
+	ostBaseFile = "msd_t081.txt"
+	dictFile = "dict_t081_1000.txt"
+	outputBase = 2
+	cfPeriod = "8 1"
+	dictStart = 1
+	dictEnd = 998
+	dictStep = 1
+	minStateCnt = 1
+	maxStateCnt = 20
+}
+
+061: 
+{
+	ostBaseFile = "msd_t061.txt"
+	dictFile = "dict_t061_1000.txt"
+	outputBase = 2
+	cfPeriod = "6 1"
+	dictStart = 1
+	dictEnd = 998
+	dictStep = 1
+	minStateCnt = 1
+	maxStateCnt = 20
+}
+
+041: 
+{
+	ostBaseFile = "msd_t041.txt"
+	dictFile = "dict_t041_1000.txt"
+	outputBase = 2
+	cfPeriod = "4 1"
+	dictStart = 1
+	dictEnd = 998
+	dictStep = 1
+	minStateCnt = 1
+	maxStateCnt = 20
+}
+
+
+021: 
+{
+	ostBaseFile = "msd_021.txt"
+	dictFile = "dict_021_250.txt"
+	outputBase = 2
+	cfPeriod = "2 1"
+	dictStart = 1
+	dictEnd = 998
+	dictStep = 1
+	minStateCnt = 1
+	maxStateCnt = 20
+}
+
+0311: 
+{
+	ostBaseFile = "msd_0311.txt"
+	dictFile = "dict_0311_500.txt"
+	outputBase = 2
+	cfPeriod = "3 1 1"
+	dictStart = 1
+	dictEnd = 998
+	dictStep = 1
+	minStateCnt = 1
+	maxStateCnt = 20
+}
+
+bronze_b3: 
+{
+	ostBaseFile = "msd_bronze.txt"
+	dictFile = "dict_br_b3_200.txt"
+	outputBase = 3
+	cfPeriod = "3"
+	dictStart = 1
+	dictEnd = 998
+	dictStep = 1
+	minStateCnt = 1
+	maxStateCnt = 20
+}
+
+bronze_b2: 
+{
+	ostBaseFile = "msd_bronze.txt"
+	dictFile = "dict_br_b2_100.txt" 
+	outputBase = 2
+	cfPeriod = "3"
+	dictStart = 1
+	dictEnd = 998
+	dictStep = 1
+	minStateCnt = 1
+	maxStateCnt = 20
+}
+
+sqrt2_b2: 
+{
+	ostBaseFile = "msd_sqrt2.txt"
+	dictFile = "dict_sqrt2_b2_100.txt"
+	outputBase = 2
+	cfPeriod = "2"
+	dictStart = 1
+	dictEnd = 998
+	dictStep = 1
+	minStateCnt = 1
+	maxStateCnt = 20
+}
+
+phi_b3: 
+{
+	ostBaseFile = "msd_phi.txt"
+	dictFile = "dict_phi_b3_400.txt"
+	outputBase = 3
+	cfPeriod = "1"
+	dictStart = 1
+	dictEnd = 998
+	dictStep = 1
+	minStateCnt = 1
+	maxStateCnt = 20
+}
+
+phi_b2: 
+{
+	ostBaseFile = "msd_phi.txt"
+	dictFile = "dict_phi_b2_999.txt"
+	outputBase = 2
+	cfPeriod = "1"
+	dictStart = 1
+	dictEnd = 998
+	dictStep = 1
+	minStateCnt = 1
+	maxStateCnt = 20
+}

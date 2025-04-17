@@ -1,0 +1,112 @@
+CadicalExhaustPath: "/mnt/h/Data/cadical-exhaustive-master/build/cadical-exhaust"
+
+081:
+{
+	ostBaseFile = "msd_t081.txt"
+	dictFile = "dict_t081_1000.txt"
+	outputBase = 2
+	cfPeriod = "8 1"
+	numStates = 11
+	dictNum = 588
+	dictExhFile = "dict_081_100000.txt"
+}
+
+061: 
+{
+	ostBaseFile = "msd_t061.txt"
+	dictFile = "dict_t061_1000.txt"
+	outputBase = 2
+	cfPeriod = "6 1"
+	numStates= 10 states
+	dictNum = 57
+	dictExhFile = "dict_061_100000.txt"
+}
+
+041: 
+{
+	ostBaseFile = "msd_t041.txt"
+	dictFile = "dict_t041_1000.txt"
+	outputBase = 2
+	cfPeriod = "4 1"
+	numStates = 11
+	dictNum = 31
+	dictExhFile = "dict_041_100000.txt"
+}
+
+
+021: 
+{
+	ostBaseFile = "msd_021.txt"
+	dictFile = "dict_021_250.txt"
+	outputBase = 2
+	cfPeriod = "2 1"
+	numStates = 11
+	dictNum = 27
+	dictExhFile = "dict_021_100000.txt"
+}
+
+0311: 
+{
+	ostBaseFile = "msd_0311.txt"
+	dictFile = "dict_0311_500.txt"
+	outputBase = 2
+	cfPeriod = "3 1 1"
+	dictNum =  57
+	numStates = 16
+	dictExhFile = "dict_0311_b2_100000.txt"
+}
+
+bronze_b3: 
+{
+	ostBaseFile = "msd_bronze.txt"
+	dictFile = "dict_br_b3_200.txt"
+	outputBase = 3
+	cfPeriod = "3"
+	dictNum =  64
+	numStates = 8
+	dictExhFile = "dict_bronze_b2_100000.txt"
+}
+
+bronze_b2: 
+{
+	ostBaseFile = "msd_bronze.txt"
+	dictFile = "dict_br_b2_100.txt" 
+	outputBase = 2
+	cfPeriod = "3"
+	dictNum =  64
+	numStates = 7
+	dictExhFile = "dict_bronze_b3_100000.txt"
+}
+
+sqrt2_b2: 
+{
+	ostBaseFile = "msd_sqrt2.txt"
+	dictFile = "dict_sqrt2_b2_100.txt"
+	outputBase = 2
+	cfPeriod = "2"
+	numStates = 6
+	dictNum = 29
+	dictExhFile= "dict_sqrt2_b2_100000.txt"
+}
+
+phi_b3: 
+{
+	ostBaseFile = "msd_phi.txt"
+	dictFile = "dict_phi_b3_400.txt"
+	outputBase = 3
+	cfPeriod = "1"
+	dictNum = 197
+	numStates = 13
+	dictExhFile = "dict_phi_b3_100000.txt"
+}
+
+phi_b2: 
+{
+	ostBaseFile = "msd_phi.txt"
+	dictFile = "dict_phi_b2_999.txt"
+	outputBase = 2
+	cfPeriod = "1"
+	dictNum = 54
+	numStates = 8
+	dictExhFile = "dict_phi_b2_100000.txt"
+}
