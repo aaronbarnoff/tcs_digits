@@ -15,7 +15,7 @@ In DFA-Inductor, config.txt lists the various quadratic irrationals tested in th
     2. Generate the large dictionary file for the DFAO from those digits using dictGenMT.c (or use dictGen.py for smaller dict sizes) in folder DictFileGeneration.
         * Usage: ```./dictGenMT digitFile dictSize base "c.f period" numThreads```
         * Usage E.g.: ```python3 dictGen.py -f dict_phi_b2_100.txt -q phi_b2_1M.txt -s 100 -e 100 -b 2 -pd '1'```
-
+    3. Run ```./runDFA.sh -f 021 -s 1```
 ### General workflow for an arbitrary quadratic irrational
 #### In Walnut:
 1. If required, run Walnut commands (instructions in paper) to create the base DFA (Walnut generates the base DFA automatically during the creation of the Walnut DFAO).
