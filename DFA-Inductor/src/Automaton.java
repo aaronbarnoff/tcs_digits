@@ -90,10 +90,6 @@ public class Automaton implements Serializable{
 					}
 				}
 			}
-			//possibly missing code here?
-			//for (Node node : states)
-			//	if (!node.isAcceptable())
-			//		node.setStatus(Node.Status.REJECTABLE);
 		}
 	}
 
@@ -144,11 +140,11 @@ public class Automaton implements Serializable{
 			childNode = curNode.getChild(label);
 			if (childNode == null)
 				childNode = curNode;
-			myLog.append(curNode.getNumber() + " --> " + childNode.getNumber() + " via " + "\"" + label + "\"\n");
+			//myLog.append(curNode.getNumber() + " --> " + childNode.getNumber() + " via " + "\"" + label + "\"\n");
 			//myLog.flush();
 			curNode = childNode;
 		}
-		myLog.append("Result: OUTPUT" + curNode.getStatus() + "\n\n");
+		//myLog.append("Result: OUTPUT" + curNode.getStatus() + "\n\n");
 		return curNode.getStatus();
 	}
 

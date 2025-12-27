@@ -23,7 +23,6 @@ public class ConsistencyGraph {
 		}
 
 		/*
-		//---basic consistency graph
 		outputSet = new ArrayList<Set<Integer>>();
 		for (int i = 0; i < numOutputs; i++) {
 			outputSet.add(apta.getOutNodes(i));
@@ -38,14 +37,11 @@ public class ConsistencyGraph {
 				}
 			}
 		}
-		//----
 		 */
-		//for proper consistency graph creation algorithm from DFA-Inductor python, but performs slowly
+		// Skipped determinization, found to be too slow.
 		if (!is_empty) {
 			for (int node_id = 1; node_id < apta.getSize(); node_id++) {
 				for (int other_id = 0; other_id < node_id; other_id++) {
-					//System.out.println("next");
-					//System.out.println("testing: " + apta.getNode(node_id).getNumber() + " and " + apta.getNode(other_id).getNumber());
 					if (!_tryToMerge(apta.getNode(node_id), apta.getNode(other_id), new HashMap<>())) {
 						edges.get(node_id).add(other_id);
 					}
@@ -66,8 +62,9 @@ public class ConsistencyGraph {
 		return edges;
 	}
 
-	//This algorithm is adapted from the Python DFA-Inductor version as it is faster: https://github.com/ctlab/DFA-Inductor-py
-	//https://github.com/ctlab/DFA-Inductor-py/blob/master/dfainductor/structures.py
+	// This algorithm was adapted from the Python DFA-Inductor version (https://github.com/ctlab/DFA-Inductor-py) as it seemed faster.
+	// Source: https://github.com/ctlab/DFA-Inductor-py/blob/master/dfainductor/structures.py
+	// However, still didn't use it as it generally took longer to create a full CG than to solve without it
 	private boolean _tryToMerge(Node node, Node other, Map<Integer, Tuple<Integer, Integer>> reps) {
 		Tuple<Integer, Integer> nodeRep = reps.getOrDefault(node.getNumber(), new Tuple<>(node.getNumber(), node.getStatus()));
 		Tuple<Integer, Integer> otherRep = new Tuple<>(other.getNumber(), other.getStatus());
@@ -135,8 +132,7 @@ public class ConsistencyGraph {
 			}
 		}
 	}
-
-	 */
+	*/
 
 	private class Triple {
 		int num;
@@ -254,7 +250,7 @@ public class ConsistencyGraph {
 		return acceptableClique.size() + rejectableClique.size();
 	}
 
-	public String toString() { //*************************************************************************
+	public String toString() {
 		StringBuilder s = new StringBuilder();
 		s.append("graph {\n");
 		s.append("    layout=\"circo\"\n");

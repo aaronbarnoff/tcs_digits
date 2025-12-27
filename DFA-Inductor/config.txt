@@ -1,132 +1,230 @@
-CadicalExhaustPath: "/mnt/h/Data/cadical-exhaustive-master/build/cadical"
-
 081:
 {
 	ostBaseFile = "msd_t081.txt"
-	dictFile = "dict_t081_1000.txt"
-	outputBase = 2
-	cfPeriod = "8 1"
-	dictStart = 1
-	dictEnd = 998
-	dictStep = 1
+	dictFile    = "dict_081_100k.txt"
+	outputBase  = 2
+	cfPeriod    = "8 1"
+
+	# regular
+	dictStart   = 1
+	dictEnd     = 998
+	dictStep    = 1
 	minStateCnt = 1
-	maxStateCnt = 20
+	maxStateCnt = 12
+	satTimeout  = 0
+
+	# exhaust
+	numStates   = 11
+	dictNum     = 588
+	dictExhFile = "dict_081_100k.txt" # these need to be generated, large file
 }
 
-061: 
+061:
 {
 	ostBaseFile = "msd_t061.txt"
-	dictFile = "dict_t061_1000.txt"
-	outputBase = 2
-	cfPeriod = "6 1"
-	dictStart = 1
-	dictEnd = 998
-	dictStep = 1
+	dictFile    = "dict_061_1000.txt"
+	outputBase  = 2
+	cfPeriod    = "6 1"
+
+	# regular
+	dictStart   = 1
+	dictEnd     = 998
+	dictStep    = 1
 	minStateCnt = 1
-	maxStateCnt = 20
+	maxStateCnt = 12
+	satTimeout  = 0
+
+	# exhaust
+	numStates   = 10
+	dictNum     = 57
+	dictExhFile = "dict_dict_061_100k.txt"
 }
 
-041: 
+041:
 {
 	ostBaseFile = "msd_t041.txt"
-	dictFile = "dict_t041_1000.txt"
-	outputBase = 2
-	cfPeriod = "4 1"
-	dictStart = 1
-	dictEnd = 998
-	dictStep = 1
+	dictFile    = "dict_t041_1000.txt"
+	outputBase  = 2
+	cfPeriod    = "4 1"
+
+	# regular
+	dictStart   = 1
+	dictEnd     = 998
+	dictStep    = 1
 	minStateCnt = 1
-	maxStateCnt = 20
+	maxStateCnt = 12
+	satTimeout  = 0
+
+	# exhaust
+	numStates   = 11
+	dictNum     = 31
+	dictExhFile = "dict_041_100k.txt"
 }
 
+031:
+{
+	ostBaseFile = "msd_031.txt"
+	dictFile    = "dict_031_999.txt"
+	outputBase  = 2
+	cfPeriod    = "3 1"
 
-021: 
+	# regular
+	dictStart   = 1
+	dictEnd     = 998
+	dictStep    = 1
+	minStateCnt = 1
+	maxStateCnt = 18
+	satTimeout  = 0
+
+	# exhaust
+	numStates   = 0
+	dictNum     = 0
+	dictExhFile = "dict_031_100k.txt"
+}
+
+021:
 {
 	ostBaseFile = "msd_021.txt"
-	dictFile = "dict_021_250.txt"
-	outputBase = 2
-	cfPeriod = "2 1"
-	dictStart = 1
-	dictEnd = 998
-	dictStep = 1
+	dictFile    = "dict_021_250.txt"
+	outputBase  = 2
+	cfPeriod    = "2 1"
+
+	# regular
+	dictStart   = 1
+	dictEnd     = 248
+	dictStep    = 1
 	minStateCnt = 1
-	maxStateCnt = 20
+	maxStateCnt = 12
+	satTimeout  = 0
+
+	# exhaust
+	numStates   = 11
+	dictNum     = 27
+	dictExhFile = "dict_021_100k.txt"
 }
 
-0311: 
+0311:
 {
 	ostBaseFile = "msd_0311.txt"
-	dictFile = "dict_0311_500.txt"
-	outputBase = 2
-	cfPeriod = "3 1 1"
-	dictStart = 1
-	dictEnd = 998
-	dictStep = 1
+	dictFile    = "dict_0311_250.txt"
+	outputBase  = 2
+	cfPeriod    = "3 1 1"
+
+	# regular
+	dictStart   = 1
+	dictEnd     = 248
+	dictStep    = 1
 	minStateCnt = 1
-	maxStateCnt = 20
+	maxStateCnt = 16
+	satTimeout  = 0
+
+	# exhaust
+	numStates   = 16
+	dictNum     = 57
+	dictExhFile = "dict_0311_b2_100k.txt"
 }
 
-bronze_b3: 
+bronze_b3:
 {
 	ostBaseFile = "msd_bronze.txt"
-	dictFile = "dict_br_b3_200.txt"
-	outputBase = 3
-	cfPeriod = "3"
-	dictStart = 1
-	dictEnd = 998
-	dictStep = 1
+	dictFile    = "dict_br_b3_200.txt"
+	outputBase  = 3
+	cfPeriod    = "3"
+
+	# regular
+	dictStart   = 1
+	dictEnd     = 198
+	dictStep    = 1
 	minStateCnt = 1
-	maxStateCnt = 20
+	maxStateCnt = 8
+	satTimeout  = 0
+
+	# exhaust
+	numStates   = 8
+	dictNum     = 64
+	dictExhFile = "dict_bronze_b3_100k.txt"
 }
 
-bronze_b2: 
+bronze_b2:
 {
 	ostBaseFile = "msd_bronze.txt"
-	dictFile = "dict_br_b2_100.txt" 
-	outputBase = 2
-	cfPeriod = "3"
-	dictStart = 1
-	dictEnd = 998
-	dictStep = 1
+	dictFile    = "dict_br_b2_100.txt"
+	outputBase  = 2
+	cfPeriod    = "3"
+
+	# regular
+	dictStart   = 1
+	dictEnd     = 998
+	dictStep    = 1
 	minStateCnt = 1
-	maxStateCnt = 20
+	maxStateCnt = 7
+	satTimeout  = 0
+
+	# exhaust
+	numStates   = 7
+	dictNum     = 64
+	dictExhFile = "dict_bronze_b2_100k.txt"
 }
 
-sqrt2_b2: 
+sqrt2_b2:
 {
 	ostBaseFile = "msd_sqrt2.txt"
-	dictFile = "dict_sqrt2_b2_100.txt"
-	outputBase = 2
-	cfPeriod = "2"
-	dictStart = 1
-	dictEnd = 998
-	dictStep = 1
+	dictFile    = "dict_sqrt2_b2_100.txt"
+	outputBase  = 2
+	cfPeriod    = "2"
+
+	# regular
+	dictStart   = 1
+	dictEnd     = 998
+	dictStep    = 1
 	minStateCnt = 1
-	maxStateCnt = 20
+	maxStateCnt = 6
+	satTimeout  = 0
+
+	# exhaust
+	numStates   = 6
+	dictNum     = 29
+	dictExhFile = "dict_sqrt2_b2_100k.txt"
 }
 
-phi_b3: 
+phi_b3:
 {
 	ostBaseFile = "msd_phi.txt"
-	dictFile = "dict_phi_b3_400.txt"
-	outputBase = 3
-	cfPeriod = "1"
-	dictStart = 1
-	dictEnd = 998
-	dictStep = 1
+	dictFile    = "dict_phi_b3_400.txt"
+	outputBase  = 3
+	cfPeriod    = "1"
+
+	# regular
+	dictStart   = 1
+	dictEnd     = 998
+	dictStep    = 1
 	minStateCnt = 1
-	maxStateCnt = 20
+	maxStateCnt = 13
+	satTimeout  = 0
+
+	# exhaust
+	numStates   = 13
+	dictNum     = 197
+	dictExhFile = "dict_phi_b3_100k.txt"
 }
 
-phi_b2: 
+phi_b2:
 {
 	ostBaseFile = "msd_phi.txt"
-	dictFile = "dict_phi_b2_999.txt"
-	outputBase = 2
-	cfPeriod = "1"
-	dictStart = 1
-	dictEnd = 998
-	dictStep = 1
+	dictFile    = "dict_phi_b2_999.txt"
+	outputBase  = 2
+	cfPeriod    = "1"
+
+	# regular
+	dictStart   = 1
+	dictEnd     = 998
+	dictStep    = 1
 	minStateCnt = 1
-	maxStateCnt = 20
+	maxStateCnt = 8
+	satTimeout  = 0
+
+	# exhaust
+	numStates   = 8
+	dictNum     = 54
+	dictExhFile = "dict_phi_b2_100k.txt"
 }

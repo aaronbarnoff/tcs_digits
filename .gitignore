@@ -1,0 +1,16 @@
+*.txt
+*.log
+*.cnf
+**/solvers/
+**/results/
+!/DFA-Inductor/
+!/DFA-Inductor/myFiles/
+!/DFA-Inductor/myFiles/dict/
+!/DFA-Inductor/myFiles/dict/**/*.txt
+!/DFA-Inductor/myFiles/dict/**/*.log
+!/DFA-Inductor/myFiles/ostBase/
+!/DFA-Inductor/myFiles/ostBase/**/*.txt
+!/DFA-Inductor/myFiles/ostBase/**/*.log
+/bin/
+/DFA-Inductor/bin/
+**/bin/

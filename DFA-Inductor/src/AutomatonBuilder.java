@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,13 +12,16 @@ public class AutomatonBuilder implements Serializable {
 		if (noisyMode) {
 			f = dfg.getF();
 		}
+		//System.out.println("Colors:"+colors +  "vertices" +vertices);
 		Automaton automaton = new Automaton(colors, numOutputs, false);
 		Map<Integer, Integer> colorsOfNodes = new HashMap<>();
-
+		//System.out.println(Arrays.toString(model));
 		for (int i = 0; i < colors; i++) {
 			for (int v = 0; v < vertices; v++) {
+				//System.out.println("v: "+v+"i: "+i+ "x[v][i]: "+ x[v][i] +"model:" + model[x[v][i] - 1]);
 				if (model[x[v][i] - 1] > 0) {
 					colorsOfNodes.put(v, i);
+					//System.out.println("Test");
 				}
 			}
 		}
@@ -54,5 +58,6 @@ public class AutomatonBuilder implements Serializable {
 		}
 		return automaton;
 	}
+
 
 }

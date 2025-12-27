@@ -39,7 +39,7 @@ public class DimacsFileGenerator {
 	private List<List<Integer>> n;
 	private List<List<Integer>> o;
 	private List<Integer> f;
-	private String tmpFile = "tmpDimacsFile.cnf";
+	private String tmpFile = "tmp";
 	private String dimacsFile;
 	private SBStrategy SB;
 	private int noisyP;
@@ -49,6 +49,7 @@ public class DimacsFileGenerator {
 	private int color = 0;
 	private List<Integer> ends;
 	private boolean fixMode;
+	private int exhaustOrder = 0;
 
 	private String[][] baseDFATrans;
 	private int numOutputs;
@@ -93,25 +94,26 @@ public class DimacsFileGenerator {
 
 		this.maxVal = Arrays.stream(pdArr).max().orElse(0);
 
-		for (int v = 0; v < vertices; v++) {
-			for (int i = 0; i < colors; i++) {
-				x[v][i] = newVariable();
-			}
-		}
-
-		//CE color variables - z[i]
-		for (int i = 0; i < colors; i++) {
-			z[i] = newVariable();
-		}
-
 		//CE Parent relation variables - y[i][j][a]
 		for (int i = 0; i < colors; i++) {
 			for (int j = 0; j < colors; j++) {
 				y[i][j] = new HashMap<>();
 				for (String label : alphabet) {
-					y[i][j].put(label, newVariable());
+					y[i][j].put(label, newVariable()); // 081: dict588 1089 transition variables
+					exhaustOrder++;
 				}
 			}
+		}
+
+		//CE color variables - z[i]
+		for (int v = 0; v < vertices; v++) {
+			for (int i = 0; i < colors; i++) {
+				x[v][i] = newVariable();
+				exhaustOrder++;
+			}
+		}
+		for (int i = 0; i < colors; i++) {
+			z[i] = newVariable();
 		}
 
 		//find all solutions - fix unused transitions into self loops
@@ -124,7 +126,6 @@ public class DimacsFileGenerator {
 				}
 			}
 		}
-
 
 		//BFS transition variables: e[i][j]\n");
 		this.e = new int[colors][colors];
@@ -153,22 +154,9 @@ public class DimacsFileGenerator {
 			}
 		}
 
-		/*
-		////Continued Fraction variables, maps a state/color to a continued fraction value and blank flag
-		//for (int i = 0; i < colors; i++) {
-		//	for (int p = 0; p < pdSz; p++) { // <= to include a blank type for each state now
-		//		for (int b = 0; b <= 1; b++) {
-		//			cf[i][p][b] = newVariable();
-		//			//System.out.printf("cf[%d][%d][%d] = %d\n",i,p,b,cf[i][p][b]);
-		//		}
-		//	}
-		//}
-		 */
-
 		for (int state = 0; state < colors; state++){
-			for (int type = 0; type < ostSz; type++){				//Ost msd_base for 311 gives 8 states
+			for (int type = 0; type < ostSz; type++){
 				ost[state][type] = newVariable();
-				//System.out.println(String.format("ost[%d][%d]=%d",state,type,ost[state][type]));
 			}
 		}
 
@@ -181,19 +169,7 @@ public class DimacsFileGenerator {
 
 	//constraints for numeration system
 	private void NumerationSystemConstraint(Buffer buffer) {
-		//eventually grab #states and transitions from DFA file
-		/*{
-				// 0   	1     	2     	3     	4     	5      //outgoing transition to base X
-				{"0", 	"1", "2 3 4 5 6 7","8", null, 	null}, //base 0
-				{"0", 	null, 	null, 	null, 	"1", 	null}, //base 1
-				{null, 	null, 	null, 	null, 	"1", 	"0"},  //base 2 //"base 2 goes to 4 on "1" and 5 on "0"
-				{null, 	null, 	null, 	null, 	null, 	"0"},  //base 3
-				{null, 	null, 	"0", 	null, 	null, 	null}, //base 4
-				{null,null,"0 1 2 3 4 5 6 7","8",null,  null}, //base 5
-		};*/
-
-		//create lookup table: invalidTrans[s][t] is the set { k | k in Alphabet and d(s,k) != t}
-		HashSet<Integer> alph = alphabet.stream().map(Integer::parseInt).collect(Collectors.toCollection(HashSet::new)); //alphabet set {0,1,2}
+		HashSet<Integer> alph = alphabet.stream().map(Integer::parseInt).collect(Collectors.toCollection(HashSet::new));
 		HashSet<Integer>[][] invalidTrans = new HashSet[ostSz][ostSz];
 		for (int i = 0; i < ostSz; i++){
 			for (int j = 0; j < ostSz; j++) {
@@ -207,11 +183,10 @@ public class DimacsFileGenerator {
 			}
 		}
 
-
 		//start state self loop on 0
 		buffer.addClause(y[0][0].getOrDefault(String.valueOf(0), 0));
 
-		int maxLabel = Integer.valueOf(Collections.max(alphabet));//Arrays.stream(pdArr).max().orElse(0);
+		int maxLabel = Integer.valueOf(Collections.max(alphabet));
 		//System.out.println(Collections.max(alphabet));
 
 		//Each state can be at least one type
@@ -243,7 +218,7 @@ public class DimacsFileGenerator {
 				for (int s = 0; s < ostSz; s++) {
 					for (int t = 0; t < ostSz; t++) {
 						for (int m = 0; m <= maxLabel; m++) {
-							if (invalidTrans[s][t].contains(m)) { //invalid[s][t] is the set of invalid transitions from base state s to base state t
+							if (invalidTrans[s][t].contains(m)) {
 								buffer.addClause(-ost[i][s], -ost[j][t], -y[i][j].get(String.valueOf(m)));
 								//System.out.println(String.format("Adding: " + "-ost[%d][%d], -ost[%d][%d], -y[%d][%d][%d]", i, s, j, t, i, j, m));
 							}
@@ -291,13 +266,10 @@ public class DimacsFileGenerator {
 					printSBPOrderByChildrenSymbolBFS(buffer);
 				}
 
-
 				if (SB == SBStrategy.CLIQUE_SB) {		//find max clique
 					printAcceptableCliqueSB(buffer);
 					printRejectableCliqueSB(buffer);
 				}
-
-
 
 				int countClauses = buffer.nClauses();
 
@@ -424,7 +396,7 @@ public class DimacsFileGenerator {
 	}
 
 	//Compact Encoding 6: Each parent relation must target at least one color: (y_{i,1,a} or ... or y_{i,|C|,a})
-	//this is modified to exclude labels other than 0 because of numeration system constraints eg no consecutive 1's
+	//this is modified because of numeration system constraints eg no consecutive 1's
 	private void printParentRelationAtLeastOneColor(Buffer buffer) {
 		/*
 		for (String st : apta.getAlphabet()) {
@@ -837,6 +809,27 @@ public class DimacsFileGenerator {
 		boolean get(int i) {
 			return ar[i];
 		}
+	}
+
+	int[] getY(){
+		int[] res = new int[y.length*y[0].length*alphabet.size()];
+		int k = 0;
+		for (int i = 0; i < colors; i++) {
+			for (int j = 0; j < colors; j++) {
+				for (String label : alphabet) {
+					res[k] = y[i][j].get(label);
+					k++;
+					//System.out.println(String.format("y[%d][%d][%s]=%d",i,j,label,y[i][j].get(label)));
+				}
+			}
+		}
+		return res;
+	}
+
+	int getExhaustOrder() {return exhaustOrder;}
+
+	int getMaxVar(){
+		return maxVar;
 	}
 
 	private int newVariable() {

@@ -26,10 +26,10 @@ Validator may require the walnut-generated DFA to be in the form:
  */
 public class Validator {
 
-	private int dictStart= 100002;
-	private int dictEnd = 100002;
+	private int dictStart= 10000;
+	private int dictEnd = 10000;
 	int numOutputs = 2;
-	boolean walnutDFA = false; //for validating DFAs created by Walnut
+	boolean walnutDFA = true; //for validating DFAs created by Walnut
 
 	private String automatonPath = "myFiles/validator/";
 	private String dictionaryPath = "myFiles/validator/tmpDict";;
@@ -64,7 +64,7 @@ public class Validator {
 				if (walnutDFA)
 					resFile = automatonPath + "walnut.txt";
 				else
-					resFile = automatonPath + "081_588_soltest.txt"; //automatonPath + N + "_" + cur +"_.txt";
+					resFile = automatonPath + "test.txt"; //automatonPath + N + "_" + cur +"_.txt";
 				System.out.println("Checking result: " + resFile);
 				if (!(new File(resFile).exists() && cur <= cutoff)) //cur < cutoff
 				{
