@@ -1,5 +1,6 @@
 // Usage: ./dictGenMT <digitFile> <dictSize> <base> <"c.f period"> <numThreads>
-// Compile: gcc -O3 dictGenMT -o dictGenMT -lgmp -lm -lpthread
+// Compile: gcc -O3 dictGenMT.c -o dictGenMT -lgmp -lm -lpthread
+// eg ./dictGenMT 081_b2_1M.txt 100000 2 "8 1" 32
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -186,26 +187,34 @@ int main(int argc, char** argv) {
         if (*p!=' ') 
             pd[pdSz++] = *p - '0';
 
+    printf("digitFile:%s, dictSize:%d, base:%d, numThreads:%d.\n", digFile, dictSize, base, numThreads);
+    printf("period:");
+    for (int i = 0; i < pdSz; i++)
+    {
+        printf("%d ", pd[i]);
+    }
+    printf("\n");
     // read digits
-// Allocate and set digArr[0] by hand
-int* digArr = malloc((dictSize+1)*sizeof(int));
-if (!digArr) { perror("malloc digArr"); exit(1); }
-digArr[0] = 0;        // we print “0 1 0” for i=0 manually
+    int* digArr = malloc((dictSize+1)*sizeof(int));
+    if (!digArr) { perror("malloc digArr"); exit(1); }
+    digArr[0] = 0;       
 
-// Now read exactly dictSize digits and put them into digArr[1]…digArr[dictSize]
-FILE* fpDig = fopen(digFile, "r");
-if (!fpDig) { perror("fopen digitFile"); exit(1); }
+    FILE* fpDig = fopen(digFile, "r");
+    if (!fpDig) { perror("fopen digitFile"); exit(1); }
 
-for (int i = 1; i <= dictSize; ) {
-    int c = fgetc(fpDig);
-    if (c == EOF) {
-        fprintf(stderr, "Unexpected EOF reading digit %d\n", i);
-        exit(1);
+    for (int i = 1; i <= dictSize; ) 
+    {
+        int c = fgetc(fpDig);
+        if (c == EOF) 
+        {
+            fprintf(stderr, "Unexpected EOF reading digit %d\n", i);
+            exit(1);
+        }
+        if (c == '0' || c == '1') 
+        {
+            digArr[i++] = c - '0';
+        }
     }
-    if (c == '0' || c == '1') {
-        digArr[i++] = c - '0';
-    }
-}
 fclose(fpDig);
 
     // build CF sequence
@@ -235,18 +244,25 @@ fclose(fpDig);
 
     // launch threads
     pthread_t* th = malloc(numThreads*sizeof(pthread_t));
-    int chunk=(dictSize+1+numThreads-1)/numThreads;
+    int chunk=(dictSize+numThreads-1)/numThreads;
+    int created = 0;
     struct timespec t0,t1; clock_gettime(CLOCK_MONOTONIC,&t0);
     for(int t=0;t<numThreads;t++)
     {
         ThreadArgs* A=malloc(sizeof(ThreadArgs));
-        int s=t*chunk, e=s+chunk-1; 
+        int s=1+t*chunk, e=s+chunk-1; 
+        if (s > dictSize)
+        {
+            free(A);
+            break;
+        }
         if(e>dictSize)
             e=dictSize;
         *A=(ThreadArgs){&seqArr,&powArr,digArr,pd,pdSz,dictSize,outArr,s,e};
-        pthread_create(&th[t],NULL,runThread,A);
+        pthread_create(&th[created],NULL,runThread,A);
+        created++;
     }
-    for(int t=0;t<numThreads;t++) 
+    for(int t=0;t<created;t++) 
         pthread_join(th[t],NULL);
     clock_gettime(CLOCK_MONOTONIC,&t1);
     double elapsed=(t1.tv_sec-t0.tv_sec)+(t1.tv_nsec-t0.tv_nsec)/1e9;

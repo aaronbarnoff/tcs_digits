@@ -1,7 +1,7 @@
 081:
 {
 	ostBaseFile = "msd_t081.txt"
-	dictFile    = "dict_081_100k.txt"
+	dictFile    = "dict_081_1000.txt"
 	outputBase  = 2
 	cfPeriod    = "8 1"
 
@@ -16,7 +16,7 @@
 	# exhaust
 	numStates   = 11
 	dictNum     = 588
-	dictExhFile = "dict_081_100k.txt" # these need to be generated, large file
+	dictExhFile = "dict_081_100000.txt" # these need to be generated, large file ~6GB
 }
 
 061:
@@ -185,6 +185,27 @@ sqrt2_b2:
 	numStates   = 6
 	dictNum     = 29
 	dictExhFile = "dict_sqrt2_b2_100k.txt"
+}
+
+sqrt2_b3:
+{
+	ostBaseFile = "msd_sqrt2.txt"
+	dictFile    = "dict_sqrt2_b3_300.txt"
+	outputBase  = 3
+	cfPeriod    = "2"
+
+	# regular
+	dictStart   = 295
+	dictEnd     = 298
+	dictStep    = 5
+	minStateCnt = 11
+	maxStateCnt = 14
+	satTimeout  = 0
+
+	# exhaust
+	numStates   = 0
+	dictNum     = 0
+	dictExhFile = "dict_sqrt2_b3_100k.txt"
 }
 
 phi_b3:
