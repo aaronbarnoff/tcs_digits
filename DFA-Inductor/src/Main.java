@@ -98,12 +98,16 @@ public class Main {
         String ts = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(Calendar.getInstance().getTime());
         String resultDirName = c.ostBaseFile.replaceAll("\\.txt$", "") + "_b" + c.outputBase + "_" + ts;
         
+        // ------
+        // If already have solutions computed, direct result dir to the folder containing the solution file 
         File resultPath = new File(resPath, resultDirName); 
         if (!resultPath.exists()) 
             resultPath.mkdir();
-
         File logFile = new File(resultPath, "log" + c.dictNum + ".txt");
-		
+        //File resultPath = new File("/mnt/e/Msc New/tcs_tmp/tcs_digits/DFA-Inductor/myFiles/results/msd_t081_b2_2025-12-26_22-06-25");
+        //File logFile = new File(resultPath, "log" + c.dictNum + "_2.txt");
+        // ------
+
         try (PrintWriter myLog = new PrintWriter(new FileWriter(logFile), true)) 
         {
             File dictFileObj = new File(dictPath, c.dictFile);
@@ -114,7 +118,7 @@ public class Main {
             }
             try (InputStream is = new FileInputStream(dictFileObj)) {
                 long fullStartTime = System.currentTimeMillis();
-                int curDFA = 1;
+                int curDFA = 0;
 
                 APTA apta = new APTA(is, c.outputBase, c.dictNum);
                 ConsistencyGraph cg = new ConsistencyGraph(apta, false, false, c.outputBase);
@@ -138,12 +142,15 @@ public class Main {
                 );
                 myLog.println("SAT solver initialized. Vars: " + solver.nVars() + ", Constraints: " + solver.nConstraints());
 
+                // -------------
+                // If already have solutions computed, comment out these lines and direct result dir to the folder containing the solution file 
                 boolean sat = solver.problemIsSatisfiable();
                 if (!sat) 
                 {
                     System.out.println("cadical-exhaust finished. Checking solutions against large dict file...");
                 }
-
+                // ------------
+                
                 int passDFA = 0;
                 int[] model = new int[dfg.getMaxVar()];
                 int[] preModel;

@@ -157,8 +157,8 @@ public class SATSolver {
             int code = p.exitValue();
             if (log != null) log.println("Exit code: " + code);
 
-            if (code != 0 && code != 10 && code != 20) {
-                throw new RuntimeException("Solver failed with exit code " + code);
+            if (code != 10 && code != 20) {
+                throw new RuntimeException("Solver gave UNKNOWN exit code: " + code);
             }
         } finally {
             if (log != null) log.close();

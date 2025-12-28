@@ -16,7 +16,7 @@
 	# exhaust
 	numStates   = 11
 	dictNum     = 588
-	dictExhFile = "dict_081_100000.txt" # these need to be generated, large file ~6GB
+	dictExhFile = "dict_081_100000.txt"
 }
 
 061:
@@ -154,7 +154,7 @@ bronze_b2:
 
 	# regular
 	dictStart   = 1
-	dictEnd     = 998
+	dictEnd     = 98
 	dictStep    = 1
 	minStateCnt = 1
 	maxStateCnt = 7
@@ -175,7 +175,7 @@ sqrt2_b2:
 
 	# regular
 	dictStart   = 1
-	dictEnd     = 998
+	dictEnd     = 98
 	dictStep    = 1
 	minStateCnt = 1
 	maxStateCnt = 6
@@ -195,10 +195,10 @@ sqrt2_b3:
 	cfPeriod    = "2"
 
 	# regular
-	dictStart   = 295
+	dictStart   = 1
 	dictEnd     = 298
-	dictStep    = 5
-	minStateCnt = 11
+	dictStep    = 1
+	minStateCnt = 1
 	maxStateCnt = 14
 	satTimeout  = 0
 
