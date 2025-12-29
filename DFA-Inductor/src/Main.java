@@ -98,15 +98,10 @@ public class Main {
         String ts = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(Calendar.getInstance().getTime());
         String resultDirName = c.ostBaseFile.replaceAll("\\.txt$", "") + "_b" + c.outputBase + "_" + ts;
         
-        // ------
-        // If already have solutions computed, direct result dir to the folder containing the solution file 
         File resultPath = new File(resPath, resultDirName); 
         if (!resultPath.exists()) 
             resultPath.mkdir();
         File logFile = new File(resultPath, "log" + c.dictNum + ".txt");
-        //File resultPath = new File("/mnt/e/Msc New/tcs_tmp/tcs_digits/DFA-Inductor/myFiles/results/msd_t081_b2_2025-12-26_22-06-25");
-        //File logFile = new File(resultPath, "log" + c.dictNum + "_2.txt");
-        // ------
 
         try (PrintWriter myLog = new PrintWriter(new FileWriter(logFile), true)) 
         {
@@ -142,15 +137,12 @@ public class Main {
                 );
                 myLog.println("SAT solver initialized. Vars: " + solver.nVars() + ", Constraints: " + solver.nConstraints());
 
-                // -------------
-                // If already have solutions computed, comment out these lines and direct result dir to the folder containing the solution file 
                 boolean sat = solver.problemIsSatisfiable();
                 if (!sat) 
                 {
                     System.out.println("cadical-exhaust finished. Checking solutions against large dict file...");
                 }
-                // ------------
-                
+                  
                 int passDFA = 0;
                 int[] model = new int[dfg.getMaxVar()];
                 int[] preModel;
@@ -172,10 +164,10 @@ public class Main {
                         if (mSol.find()) 
                         {
                             curDFA++;
-                            line = br.readLine();
-                            Matcher mTime = pTime.matcher(line);
-                            if (mTime.find()) 
-                                time = mTime.group(1);
+                            //line = br.readLine();                     // latest cadical exhaust does not give process time per soln
+                            //Matcher mTime = pTime.matcher(line);
+                            //if (mTime.find()) 
+                            //    time = mTime.group(1);
                             String match = mSol.group(1);
                             preModel = Arrays.stream(match.split(" ")).mapToInt(Integer::parseInt).toArray();
                             
@@ -572,9 +564,12 @@ public class Main {
             }
             baseDFATrans[stateId] = row;
         }
-        for (int state = 0; state < numStates; state++) if (!transitionsMap.containsKey(state)) baseDFATrans[state] = new String[numStates];
+        for (int state = 0; state < numStates; state++) 
+            if (!transitionsMap.containsKey(state)) 
+                baseDFATrans[state] = new String[numStates];
         System.out.println("\nDFA Transitions Matrix:");
-        for (int state = 0; state < baseDFATrans.length; state++) System.out.println("State " + state + ": " + Arrays.toString(baseDFATrans[state]));
+        for (int state = 0; state < baseDFATrans.length; state++) 
+            System.out.println("State " + state + ": " + Arrays.toString(baseDFATrans[state]));
         return baseDFATrans;
     }
 }

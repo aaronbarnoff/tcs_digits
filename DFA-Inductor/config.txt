@@ -37,13 +37,13 @@
 	# exhaust
 	numStates   = 10
 	dictNum     = 57
-	dictExhFile = "dict_dict_061_100k.txt"
+	dictExhFile = "dict_061_50000.txt"
 }
 
 041:
 {
 	ostBaseFile = "msd_t041.txt"
-	dictFile    = "dict_t041_1000.txt"
+	dictFile    = "dict_041_1000.txt"
 	outputBase  = 2
 	cfPeriod    = "4 1"
 
@@ -58,7 +58,7 @@
 	# exhaust
 	numStates   = 11
 	dictNum     = 31
-	dictExhFile = "dict_041_100k.txt"
+	dictExhFile = "dict_041_50000.txt"
 }
 
 031:
