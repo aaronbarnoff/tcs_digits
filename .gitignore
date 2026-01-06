@@ -4,6 +4,7 @@
 **/solvers/
 **/results/
 !/DFA-Inductor/
+!/DictFileGeneration/**/*.txt
 !/DFA-Inductor/myFiles/
 !/DFA-Inductor/myFiles/dict/
 !/DFA-Inductor/myFiles/dict/**/*.txt
@@ -14,3 +15,4 @@
 /bin/
 /DFA-Inductor/bin/
 **/bin/
+/DFA-Inductor/myFiles/dict/dict_sqrt2_b3_20000.txt

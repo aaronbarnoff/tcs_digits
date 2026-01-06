@@ -178,7 +178,6 @@ int main(int argc, char** argv) {
     int base = atoi(argv[3]);
     char* period = argv[4];
     int numThreads = atoi(argv[5]);
-
     // parse period
     int pdSz = 0; for (char* p = period; *p; p++) if (*p!=' ') pdSz++;
     int* pd = malloc(pdSz * sizeof(int));
@@ -210,20 +209,21 @@ int main(int argc, char** argv) {
             fprintf(stderr, "Unexpected EOF reading digit %d\n", i);
             exit(1);
         }
-        if (c == '0' || c == '1') 
-        {
-            digArr[i++] = c - '0';
-        }
+        digArr[i++] = c - '0';
+
     }
 fclose(fpDig);
 
     // build CF sequence
-    BigArr seqArr; bigArrInit(&seqArr, 8);
+    BigArr seqArr; 
+    bigArrInit(&seqArr, 8);
     mpz_t bound, tmp;
-    mpz_init(bound); mpz_ui_pow_ui(bound, base, dictSize);
+    mpz_init(bound); 
+    mpz_ui_pow_ui(bound, base, dictSize);
     mpz_init_set_ui(tmp,1);
     bigArrAppend(&seqArr, tmp);
-    mpz_set_ui(tmp, pd[0]); bigArrAppend(&seqArr, tmp);
+    mpz_set_ui(tmp, pd[0]); 
+    bigArrAppend(&seqArr, tmp);
     while (mpz_cmp(seqArr.data[seqArr.size-1], bound)<0)
         genSequence(&seqArr, pd, pdSz, seqArr.size, seqArr.size+64);
     mpz_clear(tmp); mpz_clear(bound);

@@ -281,7 +281,7 @@ public class Main {
 
                     for (int colors = curState; colors <= c.maxStateCnt; colors++) 
 					{      
-                        System.out.printf("N=%d (digit %d) starting, curState=%d%n", N, (N - 1), curState); System.out.flush();                 
+                        System.out.printf("N=%d (digit %d) starting, curState=%d%n", N, (N - 1), colors); System.out.flush();                 
 						String cnf = runDir.getAbsolutePath() + "/tmpDimacsFile.cnf";
                         DimacsFileGenerator dfg = new DimacsFileGenerator(
                                 apta, cg, colors, 1, 0, cnf,

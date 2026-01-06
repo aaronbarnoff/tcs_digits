@@ -190,13 +190,13 @@ sqrt2_b2:
 sqrt2_b3:
 {
 	ostBaseFile = "msd_sqrt2.txt"
-	dictFile    = "dict_sqrt2_b3_300.txt"
+	dictFile    = "dict_sqrt2_b3_500.txt"
 	outputBase  = 3
 	cfPeriod    = "2"
 
 	# regular
 	dictStart   = 1
-	dictEnd     = 298
+	dictEnd     = 498
 	dictStep    = 1
 	minStateCnt = 1
 	maxStateCnt = 14
